@@ -9,3 +9,6 @@ lint:
 
 gendiff:
 	node bin/gendiff.js
+
+testjest:
+	npx -n '--experimental-vm-modules --no-warnings' jest

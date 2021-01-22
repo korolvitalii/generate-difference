@@ -1,6 +1,11 @@
+plugins:
+  # https://github.com/jest-community/eslint-plugin-jest
+  - jest
+
 env:
   es2020: true
   node: true
+  jest: true
 
 extends: 
   - 'eslint:recommended'

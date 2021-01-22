@@ -1,6 +1,6 @@
 import readFile from './utils.js';
 import getParsedFile from './parser.js';
-import generateDiffTree from './gendiff.js';
+import generateDiffTree from './makeTree.js';
 
 const geneDiff = (before, after) => {
   const beforeFileContent = readFile(before);
