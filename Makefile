@@ -10,11 +10,9 @@ lint:
 gendiff:
 	node bin/gendiff.js
 
-testjest:
-	npx -n '--experimental-vm-modules --no-warnings' jest
-
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 
 test:
-	npm test
+	npx -n '--experimental-vm-modules --no-warnings' jest
+
