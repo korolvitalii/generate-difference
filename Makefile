@@ -12,3 +12,6 @@ gendiff:
 
 testjest:
 	npx -n '--experimental-vm-modules --no-warnings' jest
+
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
