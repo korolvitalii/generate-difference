@@ -1,4 +1,4 @@
-import genediff from '../src/index.js';
+import genediff from '../script/index.js';
 
 test('genediff', () => {
   const expected = `{
