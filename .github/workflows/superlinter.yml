@@ -1,4 +1,4 @@
-g# Name of workflow
+# Name of workflow
 name: NodeCI
 
 # Trigger the workflow on push or pull request
