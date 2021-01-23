@@ -14,5 +14,4 @@ test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 
 test:
-	npx -n '--experimental-vm-modules --no-warnings' jest
-
+	npm test
