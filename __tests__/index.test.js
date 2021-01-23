@@ -1,4 +1,3 @@
-import { test, expect } from '@jest/globals';
 import genediff from '../script/index.js';
 
 test('genediff', () => {
