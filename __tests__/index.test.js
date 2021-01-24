@@ -1,4 +1,3 @@
-// import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import genediff from '../script/index.js';
@@ -6,7 +5,6 @@ import genediff from '../script/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.resolve(__dirname, '..', '__fixtures__', filename);
-// const fileContent = (filename) =>fs.readFileSync(getFixturePath, 'utf-8');
 
 const pathFile1Json = getFixturePath('filepath1.json');
 const pathFile2Json = getFixturePath('filepath2.json');
