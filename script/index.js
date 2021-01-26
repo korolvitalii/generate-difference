@@ -1,6 +1,7 @@
 import { readFile, getFormatFile } from './utils.js';
 import parseFile from './parser.js';
-import generateDiffTree from './makeTree.js';
+import getDiff from './makeTree.js';
+import formater from './formatter/index.js';
 
 // отримуємо два файли, дістаємо іх контент, парсимо і будуємо дерево відмінностей
 const geneDiff = (before, after) => {
@@ -10,7 +11,9 @@ const geneDiff = (before, after) => {
   const afterFileFormat = getFormatFile(after);
   const parsedFileBefore = parseFile(beforeFileContent, beforeFileFormat);
   const parsedFileAfter = parseFile(afterFileContent, afterFileFormat);
-  return generateDiffTree(parsedFileBefore, parsedFileAfter);
+  const tree = getDiff(parsedFileBefore, parsedFileAfter);
+  console.log(formater(tree));
+  return formater(tree);
 };
 
 export default geneDiff;

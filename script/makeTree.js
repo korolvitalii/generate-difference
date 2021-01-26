@@ -1,39 +1,25 @@
 import _ from 'lodash';
 
-export default (before, after) => {
-  const keys = _.union(_.keys(before), _.keys(after));
-  const sortedKeys = _.sortBy(keys);
-  const result = sortedKeys.reduce((acc, key) => {
-    if (!_.has(after, key)) {
-      return [...acc, `- ${key}: ${before[key]}`];
+const getDiff = (object1, object2) => {
+  const commonKeys = _.union(Object.keys(object1), Object.keys(object2)).sort();
+  const diff = commonKeys.map((key) => {
+    if (!_.has(object1, key)) {
+      return { key, type: 'added', value: object2[key] };
     }
-    if (!_.has(before, key)) {
-      return [...acc, `+ ${key}: ${after[key]}`];
+    if (!_.has(object2, key)) {
+      return { key, type: 'deleted', value: object1[key] };
     }
-    if (_.has(after, key) && _.has(before, key)) {
-      if (after[key] === before[key]) {
-        return [...acc, `  ${key}: ${after[key]}`];
-      }
-      return [...acc, `- ${key}: ${before[key]}`, `+ ${key}: ${after[key]}`];
+    if (_.isObject(object1[key]) && _.isObject(object2[key])) {
+      return { key, type: 'parent', children: getDiff(object1[key], object2[key]) };
     }
-    return acc;
-  }, []);
-  return `{
-${result.join('\n')}
-}`;
+    if (object1[key] === object2[key]) {
+      return { key, type: 'notchanged', value: object1[key] };
+    }
+    return {
+      key, type: 'changed', valueBefore: object1[key], valueAfter: object2[key],
+    };
+  });
+  return diff;
 };
-// export default (before, after) => {
-//   const keys = _.union(_.keys(before), _.keys(after));
-//   const sortedKeys = _.sortBy(keys);
-//   return sortedKeys.map((key) => {
-//     if (!_.has(after, key)) {
-//       return { type: 'deleted', key, value: before[key] };
-//     }
-//     if (!_.has(before, key)) {
-//       return { type: 'added', key, value: after[key] };
-//     }
-//     return {
-//       key, type: 'modified', oldValue: before[key], newValue: after[key],
-//     };
-//   });
-// };
+
+export default getDiff;
