@@ -26,7 +26,7 @@ const getFormattedAddedNode = (node, path) => {
   const { key, value } = node;
   const getPath = makePath(path, key);
   const checkValue = checkValueType(value, getPath);
-  return `\nProperty ${getPath} was added with value: ${checkValue}`;
+  return `Property ${getPath} was added with value: ${checkValue}`;
 };
 
 const getFormattedUpdateNode = (node, path) => {
@@ -34,23 +34,23 @@ const getFormattedUpdateNode = (node, path) => {
   const getPath = makePath(path, key);
   const checkValueAfter = checkValueType(valueAfter, getPath);
   const checkValueBefor = checkValueType(valueBefore, path);
-  return `\nProperty ${getPath} was updated. From ${checkValueBefor} to ${checkValueAfter}`;
+  return `Property ${getPath} was updated. From ${checkValueBefor} to ${checkValueAfter}`;
 };
 
 const getFormattedRemovedtNode = (node, path) => {
   const { key } = node;
   const getPath = makePath(path, key);
-  return `\nProperty ${getPath} was removed`;
+  return `Property ${getPath} was removed`;
 };
 
 const getFormattedUnchangeNode = () => [];
 
 const mapTypeToNodeFormatter = {
-  parent: getFormattedParentNode,
   notchanged: getFormattedUnchangeNode,
   added: getFormattedAddedNode,
   removed: getFormattedRemovedtNode,
   updated: getFormattedUpdateNode,
+  parent: getFormattedParentNode,
 };
 
 const formatter = (diff) => {
@@ -60,7 +60,7 @@ const formatter = (diff) => {
       const getFormattedNode = mapTypeToNodeFormatter[type];
       return getFormattedNode(node, path, iter);
     });
-    const result = `${parts.join('')}`;
+    const result = parts.join('\n');
     return result;
   };
   return iter(diff);

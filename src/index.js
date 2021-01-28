@@ -12,7 +12,6 @@ const geneDiff = (before, after, formatName = 'stylish') => {
   const parsedFileBefore = parseFile(beforeFileContent, beforeFileFormat);
   const parsedFileAfter = parseFile(afterFileContent, afterFileFormat);
   const tree = getDiff(parsedFileBefore, parsedFileAfter);
-  // console.log(formater(tree, formatName));
   return formater(tree, formatName);
 };
 
