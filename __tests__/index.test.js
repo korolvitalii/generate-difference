@@ -1,6 +1,7 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import genediff from '../src/index.js';
+import { readFile } from '../src/utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,6 +26,8 @@ test('genediff', () => {
 
 const deepFile1Json = getFixturePath('deepfile1.json');
 const deepFile2Json = getFixturePath('deepfile2.json');
+const pathFile2JsonJson = getFixturePath('jsontest.json');
+const readFileJson = readFile(pathFile2JsonJson);
 test('genediffDeep', () => {
   const expectedDeep = `{
     common: {
@@ -70,8 +73,7 @@ test('genediffDeep', () => {
         }
     }
 }`;
-  const plained = `
-Property 'common.follow' was added with value: false
+  const plained = `Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null
 Property 'common.setting4' was added with value: 'blah blah'
@@ -82,6 +84,8 @@ Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]`;
+
   expect(genediff(deepFile1Json, deepFile2Json)).toEqual(expectedDeep);
   expect(genediff(deepFile1Json, deepFile2Json, 'plain')).toEqual(plained);
+  expect(genediff(deepFile1Json, deepFile2Json, 'json')).toEqual(readFileJson);
 });
