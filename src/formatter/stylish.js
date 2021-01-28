@@ -75,8 +75,8 @@ const mapTypeToNodeFormatter = {
   parent: getFormattedParentNode,
   notchanged: getFormattedUnchangeNode,
   added: getFormattedAddedNode,
-  deleted: getFormattedDeleteNode,
-  changed: getFormattedUpdatedNode,
+  removed: getFormattedDeleteNode,
+  updated: getFormattedUpdatedNode,
 };
 
 const formatter = (diff) => {
