@@ -12,7 +12,8 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx jest"
+    "test": "npx -n --experimental-vm-modules jest --colors",
+    "coverage": "npx -n --experimental-vm-modules jest --colors --coverage"
   },
   "repository": {
     "type": "git",
